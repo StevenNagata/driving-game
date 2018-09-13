@@ -18,4 +18,21 @@ carImage.setAttribute('src', 'http://www.clker.com/cliparts/T/Y/k/f/7/z/purple-c
 carImage.setAttribute('style', 'width:150px;height:60px')
 document.body.appendChild(carImage)
 
-var myCar = new Car(carImage, 10, 'east', [0,0])
+var myCar = new Car(carImage, 10, 'east', [0, 0])
+
+document.addEventListener('keydown', function (event) {
+  if (event.keyCode === 38 || event.keyCode === 40 || event.keyCode === 37 || event.keyCode === 39) {
+    if (event.keyCode == '38') {
+      myCar.turn('north')
+    }
+    else if (event.keyCode == '40') {
+      myCar.turn('south')
+    }
+    else if (event.keyCode == '37') {
+      myCar.turn('west')
+    }
+    else if (event.keyCode == '39') {
+      myCar.turn('east')
+    }
+  }
+})
