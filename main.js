@@ -9,7 +9,26 @@ class Car {
     this.$img.classList = ''
     this.direction = direction
     this.$img.classList.add(direction)
-
+  }
+  move() {
+    switch (this.direction) {
+      case 'north':
+        this.location[1] -= this.speed
+        break
+      case 'south':
+        this.location[1] += this.speed
+        break
+      case 'east':
+        this.location[0] += this.speed
+        break
+      case 'west':
+        this.location[0] -= this.speed
+    }
+    this.$img.setAttribute('style', 'left:' + this.location[0] + 'px; top:' + this.location[1] + 'px; width:150px;height:60px; position:absolute')
+  }
+  start() {
+    let moving = myCar.move.bind(myCar)
+    setInterval(moving, 16)
   }
 }
 
@@ -34,5 +53,11 @@ document.addEventListener('keydown', function (event) {
     else if (event.keyCode == '39') {
       myCar.turn('east')
     }
+  }
+})
+
+document.addEventListener('keydown', function (event) {
+  if (event.keyCode === 32) {
+    myCar.start()
   }
 })
