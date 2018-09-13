@@ -1,3 +1,5 @@
+var driving;
+
 class Car {
   constructor($img, speed, direction, location) {
     this.$img = $img
@@ -28,7 +30,10 @@ class Car {
   }
   start() {
     let moving = myCar.move.bind(myCar)
-    setInterval(moving, 16)
+    driving = setInterval(moving, 16)
+  }
+  stop() {
+    clearInterval(driving)
   }
 }
 
@@ -37,7 +42,7 @@ carImage.setAttribute('src', 'http://www.clker.com/cliparts/T/Y/k/f/7/z/purple-c
 carImage.setAttribute('style', 'width:150px;height:60px')
 document.body.appendChild(carImage)
 
-var myCar = new Car(carImage, 10, 'east', [0, 0])
+var myCar = new Car(carImage, 1, 'east', [0, 0])
 
 document.addEventListener('keydown', function (event) {
   if (event.keyCode === 38 || event.keyCode === 40 || event.keyCode === 37 || event.keyCode === 39) {
