@@ -1,6 +1,3 @@
-
-var moving = false;
-
 class Car {
   constructor($img, speed, direction, location) {
     this.$img = $img
@@ -8,6 +5,7 @@ class Car {
     this.direction = direction
     this.location = location
     this.driving
+    this.isStarted
   }
   turn(direction) {
     this.$img.classList = ''
@@ -33,7 +31,6 @@ class Car {
   start() {
     let moving = myCar.move.bind(myCar)
     this.driving = setInterval(moving, 16)
-    console.log(this.driving)
   }
   stop() {
     clearInterval(this.driving)
@@ -65,12 +62,14 @@ document.addEventListener('keydown', function (event) {
 })
 
 document.addEventListener('keydown', function (event) {
-  if (event.keyCode === 32 && moving === false) {
-    myCar.start()
-    moving = true;
-  }
-  else if (event.keyCode === 32 && moving === true) {
-    myCar.stop()
-    moving = false;
+  if (event.keyCode === 32) {
+    if (!this.isStarted) {
+      myCar.start()
+      this.isStarted = true
+    }
+    else {
+      myCar.stop()
+      this.isStarted = false
+    }
   }
 })
