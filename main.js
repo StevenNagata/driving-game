@@ -26,6 +26,10 @@ class Car {
     }
     this.$img.setAttribute('style', 'left:' + this.location[0] + 'px; top:' + this.location[1] + 'px; width:150px;height:60px; position:absolute')
   }
+  start() {
+    let moving = myCar.move.bind(myCar)
+    setInterval(moving, 16)
+  }
 }
 
 var carImage = document.createElement('img')
