@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-image: url('https://i.stack.imgur.com/KesVC.jpg');
 }
 .north {
   transform: rotate(270deg)

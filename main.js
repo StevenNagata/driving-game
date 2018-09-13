@@ -1,4 +1,5 @@
 var driving;
+var moving = false;
 
 class Car {
   constructor($img, speed, direction, location) {
@@ -31,6 +32,7 @@ class Car {
   start() {
     let moving = myCar.move.bind(myCar)
     driving = setInterval(moving, 16)
+    console.log(driving)
   }
   stop() {
     clearInterval(driving)
@@ -42,7 +44,7 @@ carImage.setAttribute('src', 'http://www.clker.com/cliparts/T/Y/k/f/7/z/purple-c
 carImage.setAttribute('style', 'width:150px;height:60px')
 document.body.appendChild(carImage)
 
-var myCar = new Car(carImage, 1, 'east', [0, 0])
+var myCar = new Car(carImage, 15, 'east', [0, 0])
 
 document.addEventListener('keydown', function (event) {
   if (event.keyCode === 38 || event.keyCode === 40 || event.keyCode === 37 || event.keyCode === 39) {
@@ -62,7 +64,12 @@ document.addEventListener('keydown', function (event) {
 })
 
 document.addEventListener('keydown', function (event) {
-  if (event.keyCode === 32) {
+  if (event.keyCode === 32 && moving === false) {
     myCar.start()
+    moving = true;
+  }
+  else if (event.keyCode === 32 && moving === true) {
+    myCar.stop()
+    moving = false;
   }
 })
