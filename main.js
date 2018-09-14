@@ -5,7 +5,6 @@ class Car {
     this.direction = direction
     this.location = location
     this.driving
-    this.isStarted
   }
   turn(direction) {
     this.$img.classList = ''
@@ -29,11 +28,12 @@ class Car {
     this.$img.setAttribute('style', 'left:' + this.location[0] + 'px; top:' + this.location[1] + 'px; width:150px;height:60px; position:absolute')
   }
   start() {
-    let moving = myCar.move.bind(myCar)
+    let moving = this.move.bind(this)
     this.driving = setInterval(moving, 16)
   }
   stop() {
     clearInterval(this.driving)
+    this.driving = false
   }
 }
 
@@ -61,15 +61,13 @@ document.addEventListener('keydown', function (event) {
   }
 })
 
-document.addEventListener('keydown', function (event) {
+window.addEventListener('keydown', function (event) {
   if (event.keyCode === 32) {
-    if (!this.isStarted) {
-      myCar.start()
-      this.isStarted = true
+    if (myCar.driving) {
+      myCar.stop()
     }
     else {
-      myCar.stop()
-      this.isStarted = false
+      myCar.start()
     }
   }
 })
